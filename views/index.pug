@@ -1,4 +1,13 @@
-extends layout 
+extends layout
 
 block content
-    p Hello there.
+    nav
+        a(href="/sign-up") Sign Up  
+        a(href="/login") Login
+    h2 Messages
+    ul
+        each message in messages
+            li
+                h3=message.title
+                p=message.body 
+                em=message.dateFormatted

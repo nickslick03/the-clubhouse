@@ -9,8 +9,9 @@ const Message = new Schema({
     date: { type: Date,  required: true },
 });
 
-Message.virtual("dateFromatted").get(function () {
-    return -1
+Message.virtual("dateFormatted").get(function () {
+    const d = this.date;
+    return `${d.getMonth()}/${d.getDate()}/${d.getFullYear()} ${d.getHours()}:${(d.getMinutes()+'').padStart(2, '0')}`;
 });
 
 module.exports = mongoose.model('message', Message);

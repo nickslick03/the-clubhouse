@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+    h2 Join Club
+    p Enter the secret passcode to join the club! 
+    if user 
+        form(method="post")
+            label(for="password") Passcode:
+            input(type="password" name="password" id="password")
+            input(type="hidden" name="userId" value=user._id)
+            button(type="submit") Submit 
+    else 
+        p Please #[a(href="/sign-up") sign up] or #[a(href="/login") login] to be able to join the club.
+    if errors 
+        ul 
+            each err in errors 
+                li=err

@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+    h2 New Message
+    if user 
+        form(method="post")
+            label(for="title") Title: 
+            input(type="text" name="title" id="title" value=(message ? message.title : '') required)
+            br
+            label(for="body") Body: 
+            input(type="text" name="body" id="body" value=(message ? message.body : '') required)
+            br
+            input(type="hidden" name="userId" value=user._id)
+            button(type="submit") Submit
+        if errors 
+            ul 
+                each err in errors 
+                    li=err
+    else 
+        p Please #[a(href='/join-club') join the club] to post messages.

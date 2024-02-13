@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h2 Login 
+    form(method="post")
+        label(for="email") Email: 
+        input(type="email" name="email" id="email" required value=(user ? user.email : ''))
+        br
+        label(for="password") Password: 
+        input(type="password" name="password" id="password" required)
+        br
+        button(type="submit") Submit
+    if errors 
+        ul 
+            each err in errors 
+                li=err

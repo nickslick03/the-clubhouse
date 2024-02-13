@@ -17,9 +17,17 @@ mongoose.connect(process.env.MONGODB)
 .then((m) => console.log("database connected"))
 .catch((err) => console.log(err));
 
-app.get('/', asyncHandler(async (req, res) => {
-    res.render('index');
-}));
+const indexRouter = require('./routes/index');
+const signupRouter = require('./routes/sign-up');
+const loginRouter = require('./routes/login');
+const joinClubRouter = require('./routes/join-club');
+const newMessageRouter = require('./routes/new-message');
+
+app.use('/', indexRouter);
+app.use('/sign-up', signupRouter);
+app.use('/login', loginRouter);
+app.use('/join-club', joinClubRouter);
+app.use('/new-message', newMessageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
