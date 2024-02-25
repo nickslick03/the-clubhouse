@@ -4,19 +4,19 @@ block content
     h2 Sign Up
     form(method="post")
         label(for="firstname") First Name: 
-        input(type="text" name="firstname" id="firstname" value=(locals.user ? user.firstName : '') required)
+        input(type="text" name="firstname" id="firstname" maxlength="20" required value=(locals.user ? user.firstName : ''))
         br
         label(for="lastname") Last Name: 
-        input(type="text" name="lastname" id="lastname" required value=(user ? user.lastName : ''))
+        input(type="text" name="lastname" id="lastname" maxlength="20" required value=(user ? user.lastName : ''))
         br
         label(for="email") Email: 
-        input(type="email" name="email" id="email" required value=(user ? user.email : ''))
+        input(type="email" name="email" id="email" maxlength="40" required value=(user ? user.email : ''))
         br
         label(for="password") Password: 
-        input(type="password" name="password" id="password" required)
+        input(type="password" name="password" minlength="8" id="password" value=(user ? user.password : '') required)
         br
         button(type="submit") Submit
     if errors 
         ul 
             each err in errors 
-                li=err
+                li=err.msg

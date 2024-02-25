@@ -4,10 +4,12 @@ block content
     nav
         a(href="/sign-up") Sign Up  
         a(href="/login") Login
-    h2 Messages
+        a(href="/logout") Logout
+    h2 Hello, #{user ? user.firstName : "Guest"}!
+    h3 Messages
     ul
         each message in messages
             li
-                h3=message.title
+                h4=message.title
                 p=message.body 
                 em=message.dateFormatted
