@@ -7,7 +7,8 @@ const User = new Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    isMember: { type: Boolean, reuired: true }
+    isMember: { type: Boolean, reuired: true },
+    isAdmin: { type: Boolean, required: true }
 });
 
 User.virtual("fullname").get(function () {

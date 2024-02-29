@@ -1,0 +1,9 @@
+extends layout 
+
+block content
+    h1 Delete Message
+    if errors
+        p=console.log("errors:" + errors)
+        ul
+            for err in errors 
+                li=err.msg

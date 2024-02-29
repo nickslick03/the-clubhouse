@@ -5,7 +5,6 @@ const passport = require('passport');
 
 
 module.exports.get_login = asyncHandler(async (req, res, next) => {
-    console.log(req.session.messages)
     res.render('login', {
         error: req.session.messages ? req.session.messages[req.session.messages.length - 1] : null
     });

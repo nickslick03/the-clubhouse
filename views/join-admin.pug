@@ -1,10 +1,10 @@
 extends layout 
 
 block content 
-    h2 Join Club
+    h2 Join Admin
     if user
-        if !user.isMember
-            p Enter the secret passcode to join the club! 
+        if !user.isAdmin
+            p Enter the secret passcode to join the admin team! 
             form(method="post")
                 label(for="password") Passcode:
                 input(type="password" name="password" id="password")
@@ -12,7 +12,7 @@ block content
         else
             p You're already a member!
     else 
-        p You need to #[a(href="/sign-up") sign up] and then #[a(href="/login") login] to be able to join the club.
+        p You need to #[a(href="/sign-up") sign up] and then #[a(href="/login") login] to be able to join the admin team.
     if errors 
         ul 
             each err in errors 

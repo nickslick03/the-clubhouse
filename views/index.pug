@@ -2,14 +2,27 @@ extends layout
 
 block content
     nav
-        a(href="/sign-up") Sign Up  
-        a(href="/login") Login
-        a(href="/logout") Logout
+        ul
+            if user === undefined
+                li #[a(href="/sign-up") Sign Up]  
+                li #[a(href="/login") Login]
+            if user !== undefined
+                if user.isMember
+                    li #[a(href="/new-message") New Message]
+                else
+                    li #[a(href="/join-club") Join Club]
+                li #[a(href="/logout") Logout]
     h2 Hello, #{user ? user.firstName : "Guest"}!
     h3 Messages
     ul
         each message in messages
             li
                 h4=message.title
-                p=message.body 
+                p=message.body
+                if message.user 
+                    p #[em=" - " + message.user.firstName + " " + message.user.lastName]
                 em=message.dateFormatted
+                if user && user.isAdmin
+                    form(action="/delete-message", method="post")
+                        input(type="hidden" name="message" value=message._id)
+                        button(type="submit") Delete Message

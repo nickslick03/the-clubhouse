@@ -15,6 +15,11 @@ const login_form_validation = () => [
         .isEmail(),
     body('email', 'Email must be less than or equal to 40 characters')
         .isLength({ max: 50 }),
+    body('email')
+        .custom(async (email) => {
+            const exists = (await User.exists({ email })) !== null;
+            if (exists) throw new Error('Email already in use');
+        }),
     body('password', 'Password ust be at least 8 characters')
         .isLength({ min: 8 })
 ];
@@ -23,7 +28,6 @@ module.exports.get_signup = asyncHandler(async (req, res, next) => {
     res.render('sign-up');
 });
 
-//ADD DUPLICATE EMAIL CHECK
 module.exports.post_signup = [
     login_form_validation(),
     asyncHandler(async (req, res, next) => {
@@ -31,6 +35,8 @@ module.exports.post_signup = [
             firstName: req.body.firstname,
             lastName: req.body.lastname,
             email: req.body.email,
+            isMember: false,
+            isAdmin: false
         });
         const result = validationResult(req);
         if (!result.isEmpty()) {

@@ -33,17 +33,18 @@ app.use(passport.session());
 
 passport.use(new LocalStrategy(
   {
-    usernameField: 'email'
+    usernameField: 'email',
+    passReqToCallback: true,
   },
-  async (email, password, done) => {
+  async (req, email, password, done) => {
     try {
       const user = await User.findOne({ email });
       if (user == null) {
-        return done(null, false, { message: "User does not exist"});
+        return done(null, false, { message: "User does not exist" });
       }
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return done(null, false, { message: "Incorrect password"});
+        return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);
     } catch (err) {
@@ -72,11 +73,15 @@ const signupRouter = require('./routes/sign-up');
 const loginRouter = require('./routes/login');
 const joinClubRouter = require('./routes/join-club');
 const newMessageRouter = require('./routes/new-message');
+const joinAdminRouter = require('./routes/join-admin');
+const deleteMessageRouter = require('./routes/delete-message');
 app.use('/', indexRouter);
 app.use('/sign-up', signupRouter);
 app.use('/login', loginRouter);
 app.use('/join-club', joinClubRouter);
 app.use('/new-message', newMessageRouter);
+app.use('/join-admin', joinAdminRouter);
+app.use('/delete-message', deleteMessageRouter);
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
