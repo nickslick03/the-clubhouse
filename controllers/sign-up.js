@@ -50,7 +50,7 @@ module.exports.post_signup = [
                 if (err !== undefined) next(err);
                 user.password = hash;
                 await user.save();
-                res.redirect('/');
+                res.redirect('/login');
             });
         }
     })
