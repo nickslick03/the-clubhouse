@@ -11,8 +11,7 @@ const Message = new Schema({
 
 Message.virtual("dateFormatted").get(function () {
     const d = this.date;
-    const amOrPm = d.getHours() >= 12 ? 'pm' : 'am';
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} ${d.getHours() % 12 || 12}:${(d.getMinutes()+'').padStart(2, '0')}${amOrPm}`;
+    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} ${d.getHours()}:${(d.getMinutes()+'').padStart(2, '0')}`;
 });
 
 module.exports = mongoose.model('message', Message);
