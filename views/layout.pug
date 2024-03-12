@@ -4,9 +4,22 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-
+        link(rel="stylesheet", href="/css/layout.css")
         block head
         title The Clubhouse
     body
-        h1 #[a(href="/") The Clubhouse]
+        header
+            h1 #[a(href="/") The Clubhouse]
+            nav
+                ul
+                    li #[a(href="/") Home]
+                    if user === undefined
+                        li #[a(href="/sign-up") Sign Up]  
+                        li #[a(href="/login") Login]
+                    if user !== undefined
+                        if user.isMember
+                            li #[a(href="/new-message") New Message]
+                        else
+                            li #[a(href="/join-club") Join Club]
+                    li #[a(href="/logout") Logout]
         block content

@@ -1,4 +1,7 @@
-extends layout 
+extends layout
+
+block head
+    link(rel="stylesheet" href="/css/form.css")
 
 block content 
     h2 Join Admin
@@ -10,7 +13,7 @@ block content
                 input(type="password" name="password" id="password")
                 button(type="submit") Submit
         else
-            p You're already a member!
+            p You're already an admin!
     else 
         p You need to #[a(href="/sign-up") sign up] and then #[a(href="/login") login] to be able to join the admin team.
     if errors 
