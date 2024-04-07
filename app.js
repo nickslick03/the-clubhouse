@@ -27,7 +27,14 @@ mongoose.connect(process.env.MONGODB)
 .catch((err) => console.log(err));
 
 // Authentication
-app.use(session({ secret: 'Jesus', resave: false, saveUninitialized: true }));
+app.use(session({ 
+  secret: 'Jesus', 
+  resave: false, 
+  saveUninitialized: true,
+  cookie: {
+    sameSite: 'strict'
+  }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
